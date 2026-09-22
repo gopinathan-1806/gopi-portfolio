@@ -58,17 +58,31 @@ Open `src/data/projects.ts` and copy an existing object in the `projects` array:
   slug: "my-new-project",
   title: "Project Name",
   tagline: "One-line description",
+  summary: "1-2 sentence summary shown on the card face.",
   problem: "What problem were you solving?",
   solution: "What did you build, and how?",
+  architecture: "A short paragraph on how it's built — shown in the detail modal.",
+  diagramLabel: "Short Pipeline Name",   // caption shown on the diagram
+  flow: [                                 // powers the card thumbnail + modal diagram
+    { icon: "MessageSquare", label: "Step 1" },
+    { icon: "Sparkles", label: "Step 2", sublabel: "Optional detail" },
+  ],
   tech: ["Python", "Kubernetes", "..."],
+  keyFeatures: ["Feature 1", "Feature 2"],
+  challenges: ["Engineering challenge 1", "Engineering challenge 2"],
   impact: ["Outcome 1", "Outcome 2"],
   githubUrl: "https://github.com/gopinathan-1806/my-new-project",
+  liveUrl: undefined,                     // optional — adds a "Live Demo" link/button when set
   category: ["AI Agents"],      // must match / extend projectCategories below
   featured: true,                 // optional — pins it near the top and badges it
 },
 ```
 
 If you use a new category tag, add it to the `projectCategories` array in the same file so the filter pills pick it up automatically.
+
+### Project visuals (diagrams, not screenshots)
+
+Rather than generic stock photos or fabricated UI screenshots, each project card and its detail modal render an on-brand SVG workflow/architecture diagram generated from that project's `flow` array (`src/components/project-visuals.tsx`). Each `flow` step needs an `icon` name that exists in the `iconMap` at the top of that file — pick any [lucide-react](https://lucide.dev/icons) icon name and add it to the map if it isn't there yet. This keeps every project visual consistent, resolution-independent (crisp on retina, no extra image weight), and accurate to what the project actually does — swap in a real screenshot later by replacing `<ProjectThumbnail>` in `project-card.tsx` with a Next.js `<Image>` if you'd prefer.
 
 ### Replacing the resume
 

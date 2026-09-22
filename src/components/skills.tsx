@@ -1,9 +1,10 @@
-import { Boxes, Brain, Cloud } from "lucide-react";
+import { ArrowRight, Boxes, Brain, Cloud } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { expertisePillars, skillGroups } from "@/data/skills";
 
 const pillarIcons = [Cloud, Boxes, Brain];
+const pillarStory = ["Foundations", "Delivery", "Intelligence"];
 
 export function Skills() {
   return (
@@ -15,7 +16,20 @@ export function Skills() {
           description="Deep in three clouds, fluent across the full delivery pipeline, and hands-on with production Generative AI."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <Reveal className="mt-14 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          {pillarStory.map((word, i) => (
+            <span key={word} className="flex items-center gap-2">
+              <span className={i === pillarStory.length - 1 ? "text-accent" : undefined}>
+                {word}
+              </span>
+              {i < pillarStory.length - 1 ? (
+                <ArrowRight className="h-3.5 w-3.5 text-accent/60" />
+              ) : null}
+            </span>
+          ))}
+        </Reveal>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
           {expertisePillars.map((pillar, i) => {
             const Icon = pillarIcons[i % pillarIcons.length];
             return (
